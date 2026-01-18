@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OFFICIAL DEMOS DIRECTORY - V1.0</title>
+    <style>
+        /* 90s OS Aesthetic CSS */
+        :root {
+            --win-grey: #c0c0c0;
+            --win-dark: #808080;
+            --win-blue: #000080;
+            --win-white: #ffffff;
+        }
+
+        body {
+            background-color: #008080; /* Classic Teal Desktop */
+            font-family: "Courier New", Courier, monospace;
+            margin: 0;
+            padding: 20px;
+            color: black;
+            font-size: 14px;
+        }
+
+        .window {
+            background: var(--win-grey);
+            border: 2px solid;
+            border-color: var(--win-white) var(--win-dark) var(--win-dark) var(--win-white);
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            box-shadow: 2px 2px 0px black;
+        }
+
+        .title-bar {
+            background: var(--win-blue);
+            color: white;
+            padding: 3px 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 15px;
+            border: 1px solid var(--win-dark);
+            margin: 5px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+
+        .album-art {
+            width: 100%;
+            border: 2px inset var(--win-dark);
+            background: #000;
+        }
+
+        .player-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .track {
+            background: #e0e0e0;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 2px outset var(--win-white);
+        }
+
+        .track-title {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        audio {
+            width: 100%;
+            height: 30px;
+        }
+
+        .lyrics-box {
+            background: white;
+            border: 2px inset var(--win-dark);
+            padding: 10px;
+            height: 200px;
+            overflow-y: scroll;
+            font-size: 12px;
+            white-space: pre-wrap;
+        }
+
+        .btn {
+            background: var(--win-grey);
+            border: 2px solid;
+            border-color: var(--win-white) var(--win-dark) var(--win-dark) var(--win-white);
+            padding: 5px 15px;
+            text-decoration: none;
+            color: black;
+            display: inline-block;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .btn:active {
+            border-color: var(--win-dark) var(--win-white) var(--win-white) var(--win-dark);
+        }
+
+        .blink { animation: blinker 1s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
+
+        marquee {
+            background: #000;
+            color: #0f0;
+            padding: 5px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .secret-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    font-size: 10px;
+}
+
+.icon-img {
+    width: 32px;
+    height: 32px;
+    background: #ffffc0;
+    border: 2px solid #000;
+    margin-bottom: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+/* Petit détail pour faire une icône de dossier en pur CSS */
+.icon-img::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -2px;
+    width: 15px;
+    height: 5px;
+    background: #ffffc0;
+    border: 2px solid #000;
+}
+
+#secret-window {
+    display: none; /* Caché par défaut */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    width: 300px;
+}
+    </style>
+</head>
+<body>
+
+<marquee>SYSTEM STATUS: ONLINE ... ACCESSING "DEMOS" DATABASE ... WELCOME AUTHORIZED USER ...</marquee>
+
+<div class="window">
+    <div class="title-bar">
+        <span>C:\MUSIC\ALBUM_DEMOS\COVER.EXE</span>
+        <span>[?] [X]</span>
+    </div>
+    <div class="content">
+        <div class="grid">
+            <div>
+                <img src="https://github.com/JujuHunter/demos/blob/main/cover.png?raw=true" alt="Album Cover" class="album-art">
+                <p><i>Internal File: cover.png</i></p>
+                <img src="https://github.com/JujuHunter/demos/blob/main/back.png?raw=true" alt="Album Back" class="album-art" style="margin-top:10px">
+                <p><i>Internal File: back.png</i></p>
+            </div>
+            <div>
+                <h2 style="margin-top:0">ALBUM: DEMOS</h2>
+                <p>CLASSIFICATION: PAS ENCORE SORTI</p>
+                <p class="blink" style="color: red;">[ALBUM MECONNU TROUVE]</p>
+                <hr>
+                <p>Voici 3 sur les 6 chansons de cet album définitivement très NICHE car il ne nous révèle pas tout ses secrets... aka ses chansons... </p>
+                <p>Cliquez pour initialiser le lancement de bonheur musical:</p>
+                
+                <div class="player-list">
+                    <div class="track">
+                        <span class="track-title">01_bird_in_a_cage.wav</span>
+                        <audio controls src="https://github.com/JujuHunter/demos/raw/refs/heads/main/bird_in_a_cage.mp3"></audio>
+                    </div>
+                    <div class="track">
+                        <span class="track-title">02_you_dont_know_anything.wav</span>
+                        <audio controls src="https://github.com/JujuHunter/demos/raw/refs/heads/main/you_dont_know_anything.mp3"></audio>
+                    </div>
+                    <div class="track">
+                        <span class="track-title">03_the_liar.wav</span>
+                        <audio controls src="https://github.com/JujuHunter/demos/raw/refs/heads/main/the_liar.mp3"></audio>
+                    </div>
+                    </div>
+
+                    <p>Donnez nous votre avis! Cet album secret très niche devrait il sortir...?</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="window">
+    <div class="title-bar">
+        <span>C:\DOCUMENTS\LYRICS_SCANS.TXT</span>
+        <span>[?] [X]</span>
+    </div>
+    <div class="content">
+        <div class="grid">
+            <div class="lyrics-box">
+                <b>Bird in a cage</b>
+Bird in a cage,
+Who just wants to escape,
+Fly, little bird,
+Fly, fly away,
+
+But just as he flies,
+He soonly realies,
+The chain around him,
+Are tugging on his skin,
+
+And he says,
+Should I even keep trying,
+Should I even keep going,
+
+Little bird the world is against you,
+But keep going as if you never knew,
+Cause when your master ain’t here,
+You never know maybe the end is near,
+
+And please make it to another year
+            </div>
+            <div>
+                <img src="https://github.com/JujuHunter/demos/blob/main/lyrics1.png?raw=true" alt="Lyric Scan" class="album-art">
+                <p><i>Scan_001.jpg</i></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p align="center" style="color: white; font-size: 10px;">
+    &copy; 1998 JEFFREY PUFFER RECORDS INC. <br>
+    BEST VIEWED IN INTERNET EXPLORER 4.0
+</p>
+<div class="secret-icon" onclick="toggleSecret()">
+    <div class="icon-img"></div>
+    CONFIDENTIAL.DOC
+</div>
+
+<div id="secret-window" class="window">
+    <div class="title-bar" style="background: #800000;">
+        <span>RESTRICTED_AREA.SYS</span>
+        <span style="cursor:pointer" onclick="toggleSecret()">[X]</span>
+    </div>
+    <div class="content" style="text-align: center; background: #000; color: #0f0;">
+        <p>*** ACCÈS TRÈS RESTREINT ***</p>
+        <p>Vous avez trouvé l'archive "Niche".</p>
+        <hr>
+        <a href="TON_LIEN_SUPER_NICHE_ICI" style="color: #0f0; text-decoration: underline;">
+            ENTRER DANS LE SERVEUR SECRETS.EXE
+        </a>
+        <br><br>
+        <button class="btn" onclick="toggleSecret()">ANNULER</button>
+    </div>
+</div>
+<script>
+    function toggleSecret() {
+        var x = document.getElementById("secret-window");
+        if (x.style.display === "none" || x.style.display === "") {
+            x.style.display = "block";
+            console.log("Accès aux archives secrètes...");
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
+</body>
+</html>
