@@ -20,13 +20,19 @@
             padding: 20px;
             color: black;
             font-size: 14px;
+            overflow-x: hidden;
+        }
+
+        /* Responsive Padding for Mobile */
+        @media (max-width: 600px) {
+            body { padding: 10px; }
         }
 
         .window {
             background: var(--win-grey);
             border: 2px solid;
             border-color: var(--win-white) var(--win-dark) var(--win-dark) var(--win-white);
-            width: 90%;
+            width: 95%;
             max-width: 800px;
             margin: 0 auto 20px auto;
             box-shadow: 2px 2px 0px black;
@@ -40,12 +46,14 @@
             justify-content: space-between;
             align-items: center;
             font-weight: bold;
+            font-size: 12px;
         }
 
         .content {
             padding: 15px;
             border: 1px solid var(--win-dark);
             margin: 5px;
+            background: var(--win-grey);
         }
 
         .grid {
@@ -54,14 +62,28 @@
             gap: 20px;
         }
 
+        /* MOBILE ADJUSTMENTS */
         @media (max-width: 600px) {
-            .grid { grid-template-columns: 1fr; }
+            .grid { 
+                grid-template-columns: 1fr; /* Force une seule colonne */
+                gap: 10px;
+            }
+            .window {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            .lyrics-box {
+                height: 300px !important; /* Un peu plus court sur mobile */
+            }
+            h2 { font-size: 18px; }
         }
 
         .album-art {
             width: 100%;
+            height: auto;
             border: 2px inset var(--win-dark);
             background: #000;
+            display: block;
         }
 
         .player-list {
@@ -80,11 +102,13 @@
             font-weight: bold;
             display: block;
             margin-bottom: 5px;
+            font-size: 12px;
+            word-break: break-all;
         }
 
         audio {
             width: 100%;
-            height: 30px;
+            height: 35px;
         }
 
         .lyrics-box {
@@ -93,20 +117,23 @@
             padding: 10px;
             height: 400px;
             overflow-y: scroll;
-            font-size: 12px;
+            font-size: 13px;
             white-space: pre-wrap;
+            line-height: 1.4;
         }
 
         .btn {
             background: var(--win-grey);
             border: 2px solid;
             border-color: var(--win-white) var(--win-dark) var(--win-dark) var(--win-white);
-            padding: 5px 15px;
+            padding: 8px 12px;
             text-decoration: none;
             color: black;
             display: inline-block;
             margin-top: 10px;
             cursor: pointer;
+            font-weight: bold;
+            text-align: center;
         }
 
         .btn:active {
@@ -121,51 +148,67 @@
             color: #0f0;
             padding: 5px;
             font-family: 'Courier New', Courier, monospace;
+            margin-bottom: 10px;
+            display: block;
         }
+
+        /* SECRET ICON STYLES */
         .secret-icon {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    text-align: center;
-    cursor: pointer;
-    text-decoration: none;
-    color: white;
-    font-size: 10px;
-}
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            font-size: 10px;
+            z-index: 99;
+            background: rgba(0,0,0,0.2);
+            padding: 5px;
+            border-radius: 3px;
+        }
 
-.icon-img {
-    width: 32px;
-    height: 32px;
-    background: #ffffc0;
-    border: 2px solid #000;
-    margin-bottom: 5px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-}
+        .icon-img {
+            width: 32px;
+            height: 25px;
+            background: #ffffc0;
+            border: 2px solid #000;
+            margin-bottom: 5px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+        }
 
-/* Petit détail pour faire une icône de dossier en pur CSS */
-.icon-img::before {
-    content: "";
-    position: absolute;
-    top: -5px;
-    left: -2px;
-    width: 15px;
-    height: 5px;
-    background: #ffffc0;
-    border: 2px solid #000;
-}
+        .icon-img::before {
+            content: "";
+            position: absolute;
+            top: -6px;
+            left: -2px;
+            width: 12px;
+            height: 4px;
+            background: #ffffc0;
+            border: 2px solid #000;
+        }
 
-#secret-window {
-    display: none; /* Caché par défaut */
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 100;
-    width: 300px;
-}
+        #secret-window {
+            display: none; 
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            width: 90%;
+            max-width: 320px;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
     </style>
 </head>
 <body>
@@ -181,14 +224,14 @@
         <div class="grid">
             <div>
                 <img src="https://github.com/JujuHunter/demos/blob/main/cover.png?raw=true" alt="Album Cover" class="album-art">
-                <p><i>Internal File: cover.png</i></p>
+                <p><i>File: cover.png</i></p>
                 <img src="https://github.com/JujuHunter/demos/blob/main/back.png?raw=true" alt="Album Back" class="album-art" style="margin-top:10px">
-                <p><i>Internal File: back.png</i></p>
+                <p><i>File: back.png</i></p>
             </div>
             <div>
                 <h2 style="margin-top:0">ALBUM: DEMOS</h2>
-                <p>CLASSIFICATION: PAS ENCORE SORTI</p>
-                <p class="blink" style="color: red;">[ALBUM MECONNU TROUVE]</p>
+                <p>STATUS: <span style="background: yellow;">PAS ENCORE SORTI</span></p>
+                <p class="blink" style="color: red; font-weight: bold;">[ALBUM MECONNU TROUVE]</p>
                 <hr>
                 <p>Voici 3 sur les 6 chansons de cet album définitivement très NICHE car il ne nous révèle pas tout ses secrets... aka ses chansons... </p>
                 <p>Cliquez pour initialiser le lancement de bonheur musical:</p>
@@ -206,11 +249,11 @@
                         <span class="track-title">03_the_liar.wav</span>
                         <audio controls src="https://github.com/JujuHunter/demos/raw/refs/heads/main/the_liar.mp3"></audio>
                     </div>
-                    </div>
+                </div>
 
-                    <p>Donnez nous votre avis! Cet album secret très niche devrait il sortir...?</p>
-                    <p>Envoyez vos avis, quels qu'ils soient sur l'application instagram --> @jujupriveyy</p>
-                    <p>😉😉😉</p>
+                <p>Donnez nous votre avis! Cet album secret très niche devrait il sortir...?</p>
+                <p>Envoyez vos avis, quels qu'ils soient sur l'application très niche : instagram </p>
+                <a href="https://instagram.com/jujupriveyy" class="btn">@jujupriveyy</a>
             </div>
         </div>
     </div>
@@ -218,8 +261,8 @@
 
 <div class="window">
     <div class="title-bar">
-        <span>C:\DOCUMENTS\LYRICS_SCANS.TXT</span>
-        <span>[?] [X]</span>
+        <span>C:\DOCUMENTS\LYRICS_01.TXT</span>
+        <span>[X]</span>
     </div>
     <div class="content">
         <div class="grid">
@@ -253,10 +296,11 @@ And please make it to another year
         </div>
     </div>
 </div>
-    <div class="window">
+
+<div class="window">
     <div class="title-bar">
-        <span>C:\DOCUMENTS\LYRICS_SCANS.TXT</span>
-        <span>[?] [X]</span>
+        <span>C:\DOCUMENTS\LYRICS_02.TXT</span>
+        <span>[X]</span>
     </div>
     <div class="content">
         <div class="grid">
@@ -283,10 +327,11 @@ That I’m one of them
         </div>
     </div>
 </div>
-    <div class="window">
+
+<div class="window">
     <div class="title-bar">
-        <span>C:\DOCUMENTS\LYRICS_SCANS.TXT</span>
-        <span>[?] [X]</span>
+        <span>C:\DOCUMENTS\LYRICS_03.TXT</span>
+        <span>[X]</span>
     </div>
     <div class="content">
         <div class="grid">
@@ -320,10 +365,13 @@ When its already too late for you
     </div>
 </div>
 
-<p align="center" style="color: white; font-size: 10px;">
+<p align="center" style="color: white; font-size: 10px; padding-bottom: 80px;">
     &copy; 1998 JEFFREY PUFFER RECORDS INC. <br>
     BEST VIEWED IN INTERNET EXPLORER 4.0
 </p>
+
+<div id="overlay" class="overlay" onclick="toggleSecret()"></div>
+
 <div class="secret-icon" onclick="toggleSecret()">
     <div class="icon-img"></div>
     CONFIDENTIAL.DOC
@@ -338,27 +386,27 @@ When its already too late for you
         <p>*** ACCÈS TRÈS RESTREINT ***</p>
         <p>Vous avez trouvé l'archive "Niche".</p>
         <hr>
-        <a href="https://jujuhunter.github.io/demos/secret.html" style="color: #0f0; text-decoration: underline;">
+        <a href="https://jujuhunter.github.io/demos/secret.html" style="color: #0f0; text-decoration: underline; font-weight: bold;">
             ENTRER DANS LE SERVEUR SECRETS.EXE
         </a>
         <br><br>
         <button class="btn" onclick="toggleSecret()">ANNULER</button>
     </div>
 </div>
+
 <script>
     function toggleSecret() {
-        var x = document.getElementById("secret-window");
-        if (x.style.display === "none" || x.style.display === "") {
-            x.style.display = "block";
-            console.log("Accès aux archives secrètes...");
+        var win = document.getElementById("secret-window");
+        var ov = document.getElementById("overlay");
+        if (win.style.display === "none" || win.style.display === "") {
+            win.style.display = "block";
+            ov.style.display = "block";
         } else {
-            x.style.display = "none";
+            win.style.display = "none";
+            ov.style.display = "none";
         }
     }
 </script>
+
 </body>
-
 </html>
-
-
-
